@@ -4,4 +4,5 @@ This repository contains the projects developed by me while learning Flutter and
 
 ## Project List:
 
-Startup Name Generator
+- Startup Name Generator
+- Lakes App
