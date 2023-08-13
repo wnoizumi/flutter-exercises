@@ -10,6 +10,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var selectedIndex = 0;
 
+  void _onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget page;
@@ -25,36 +31,48 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
-      body: Row(
-        children: [
-          SafeArea(
-            child: NavigationRail(
-              extended: true,
-              destinations: [
-                NavigationRailDestination(
-                  icon: Icon(Icons.home),
-                  label: Text('Home'),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.favorite),
-                  label: Text('Favorites'),
-                ),
-              ],
-              selectedIndex: selectedIndex,
-              onDestinationSelected: (value) {
-                setState(() {
-                  selectedIndex = value;
-                });
+      appBar: AppBar(title: Text('Namer App')),
+      body: Center(
+        child: Container(
+          color: Theme.of(context).colorScheme.primaryContainer,
+          child: page,
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text('Options'),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: const Text('Home'),
+              selected: selectedIndex == 0,
+              onTap: () {
+                // Update the state of the app
+                _onItemTapped(0);
+                // Then close the drawer
+                Navigator.pop(context);
               },
             ),
-          ),
-          Expanded(
-            child: Container(
-              color: Theme.of(context).colorScheme.primaryContainer,
-              child: page,
+            ListTile(
+              leading: Icon(Icons.favorite),
+              title: const Text('Favorites'),
+              selected: selectedIndex == 1,
+              onTap: () {
+                // Update the state of the app
+                _onItemTapped(1);
+                // Then close the drawer
+                Navigator.pop(context);
+              },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
