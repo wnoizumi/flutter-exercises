@@ -51,34 +51,5 @@ class FavoritesPage extends StatelessWidget {
             .toList(),
       ),
     );
-
-    ListView(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: Text('You have '
-              '${favorites.length} favorites:'),
-        ),
-        ...favorites
-            .map((name) => ListTile(
-                  leading: IconButton(
-                      icon: Icon(Icons.favorite),
-                      onPressed: () async {
-                        if (await confirm(
-                          context,
-                          title: const Text('Confirm'),
-                          content: const Text('Would you like to remove?'),
-                          textOK: const Text('Yes'),
-                          textCancel: const Text('No'),
-                        )) {
-                          return appState.updateFavoriteState(name);
-                        }
-                        return print('pressedCancel');
-                      }),
-                  title: Text(name.toLowerCase()),
-                ))
-            .toList()
-      ],
-    );
   }
 }
