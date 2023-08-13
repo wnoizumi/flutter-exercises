@@ -32,4 +32,16 @@ class MyAppState extends ChangeNotifier {
     namesBox.put('favorites', favorites);
     notifyListeners();
   }
+
+  void updateFavoriteState(String name) {
+    var namesBox = Hive.box('names');
+    var favorites = namesBox.get('favorites');
+    if (favorites.contains(name)) {
+      favorites.remove(name);
+    } else {
+      favorites.add(name);
+    }
+    namesBox.put('favorites', favorites);
+    notifyListeners();
+  }
 }

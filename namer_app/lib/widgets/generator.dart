@@ -33,11 +33,12 @@ class GeneratorPage extends StatelessWidget {
                 label: Text('Like'),
               ),
               SizedBox(width: 10),
-              ElevatedButton(
+              ElevatedButton.icon(
                 onPressed: () {
                   appState.getNext();
                 },
-                child: Text('Next'),
+                icon: Icon(Icons.navigate_next),
+                label: Text('Next'),
               ),
             ],
           ),

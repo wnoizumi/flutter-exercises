@@ -4,6 +4,11 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:namer_app/widgets/my_app.dart';
 
 void main() async {
+  await initHive();
+  runApp(const MyApp());
+}
+
+Future<void> initHive() async {
   await Hive.initFlutter();
   var namesBox = await Hive.openBox('names');
   if (namesBox.get('current') == null) {
@@ -12,5 +17,4 @@ void main() async {
   if (namesBox.get('favorites') == null) {
     namesBox.put('favorites', <dynamic>[]);
   }
-  runApp(const MyApp());
 }
