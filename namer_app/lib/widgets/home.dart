@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           SafeArea(
             child: NavigationRail(
-              extended: true,
+              extended: false,
               destinations: [
                 NavigationRailDestination(
                   icon: Icon(Icons.home),
