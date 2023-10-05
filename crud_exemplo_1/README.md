@@ -25,3 +25,8 @@ Complete a implementação por meio dos seguintes exercícios.
 9- Implemente controle de usuários com autenticação e autorização.
 
 10- Crie um layout personalizado para o seu aplicativo, alterando os temas e layouts originais.
+
+11- Desafios:
+- Resolva o problema de transição, quando troca da tela de pessoas para produtos, por exemplo. A transição faz parecer que uma tela nova está sendo criada. Ao invés disso, queremos que o usuário veja a transição como se fosse uma troca de abas na mesma tela.
+- Teste e implemente formas diferentes de exibir o menu de cadastros (e.g., barra lateral).
+- Mude o cadastro de pessoas para que apenas o nome e o email sejam obrigatórios.
