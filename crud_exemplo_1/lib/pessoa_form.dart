@@ -55,113 +55,115 @@ class _PessoaFormState extends State<PessoaForm> {
           child: Form(
             //aqui especificamos o identificador do form
             key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                TextFormField(
-                  autofocus: true,
-                  decoration: const InputDecoration(labelText: 'Nome'),
-                  validator: (value) {
-                    if ((value ?? '').isEmpty) {
-                      return 'Informe o nome';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    nome = value!;
-                  },
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        readOnly: true,
-                        decoration: const InputDecoration(
-                            labelText: 'Data de Nascimento'),
-                        controller: TextEditingController(
-                            text: dataNascimentoFormatada),
-                        validator: (value) {
-                          if (dataNascimento == null) {
-                            return 'Selecione a data de nascimento';
-                          }
-                          return null;
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextFormField(
+                    autofocus: true,
+                    decoration: const InputDecoration(labelText: 'Nome'),
+                    validator: (value) {
+                      if ((value ?? '').isEmpty) {
+                        return 'Informe o nome';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      nome = value!;
+                    },
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          readOnly: true,
+                          decoration: const InputDecoration(
+                              labelText: 'Data de Nascimento'),
+                          controller: TextEditingController(
+                              text: dataNascimentoFormatada),
+                          validator: (value) {
+                            if (dataNascimento == null) {
+                              return 'Selecione a data de nascimento';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.calendar_today),
+                        onPressed: () {
+                          _selecionarData(context);
                         },
                       ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.calendar_today),
-                      onPressed: () {
-                        _selecionarData(context);
-                      },
-                    ),
-                  ],
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(labelText: 'Gênero'),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Selecione o gênero';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    genero = value!;
-                  },
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(labelText: 'Email'),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Digite o email';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    email = value!;
-                  },
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(labelText: 'Telefone'),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Digite o telefone';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    telefone = value!;
-                  },
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(labelText: 'Endereço'),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Digite o endereço';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    endereco = value!;
-                  },
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                      pessoaController.incluir(PessoaModelo(
-                          nome: nome,
-                          email: email,
-                          dataNascimento: dataNascimento!,
-                          genero: genero,
-                          telefone: telefone,
-                          endereco: endereco));
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: const Text('Salvar'),
-                ),
-              ],
+                    ],
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(labelText: 'Gênero'),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Selecione o gênero';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      genero = value!;
+                    },
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(labelText: 'Email'),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Digite o email';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      email = value!;
+                    },
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(labelText: 'Telefone'),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Digite o telefone';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      telefone = value!;
+                    },
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(labelText: 'Endereço'),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Digite o endereço';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      endereco = value!;
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        pessoaController.incluir(PessoaModelo(
+                            nome: nome,
+                            email: email,
+                            dataNascimento: dataNascimento!,
+                            genero: genero,
+                            telefone: telefone,
+                            endereco: endereco));
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: const Text('Salvar'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

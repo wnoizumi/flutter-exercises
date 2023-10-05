@@ -12,7 +12,7 @@ class PessoasLista extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Cadastro de Pessoas'),
         ),
-        floatingActionButton: FloatingActionButton.large(
+        floatingActionButton: FloatingActionButton(
           onPressed: () {
             //aqui definimos a rota da tela a ser aberta
             Navigator.pushNamed(context, '/add_pessoa');
