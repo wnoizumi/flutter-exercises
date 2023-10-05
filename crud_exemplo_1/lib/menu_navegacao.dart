@@ -28,7 +28,7 @@ class _MenuNavegacaoState extends State<MenuNavegacao> {
         navegacaoController.atualizarPaginaSelecionada(index);
         Navigator.pushReplacementNamed(context, _getRotaSelecionada(index));
       },
-      indicatorColor: Colors.amber[800],
+      indicatorColor: Colors.blue[800],
       selectedIndex: navegacaoController.paginaSelecionada,
       destinations: const <Widget>[
         NavigationDestination(
