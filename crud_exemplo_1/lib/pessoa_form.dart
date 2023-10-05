@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class PessoaForm extends StatefulWidget {
+  const PessoaForm({super.key});
+
   @override
   _PessoaFormState createState() => _PessoaFormState();
 }
@@ -16,7 +18,7 @@ class _PessoaFormState extends State<PessoaForm> {
 
   String nome = '';
   DateTime? dataNascimento;
-  String genero = '';
+  String departamento = '';
   String email = '';
   String telefone = '';
   String endereco = '';
@@ -98,15 +100,16 @@ class _PessoaFormState extends State<PessoaForm> {
                     ],
                   ),
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'Gênero'),
+                    decoration:
+                        const InputDecoration(labelText: 'Departamento'),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Selecione o gênero';
+                        return 'Digite o departamento';
                       }
                       return null;
                     },
                     onSaved: (value) {
-                      genero = value!;
+                      departamento = value!;
                     },
                   ),
                   TextFormField(
@@ -154,7 +157,7 @@ class _PessoaFormState extends State<PessoaForm> {
                             nome: nome,
                             email: email,
                             dataNascimento: dataNascimento!,
-                            genero: genero,
+                            departamento: departamento,
                             telefone: telefone,
                             endereco: endereco));
                         Navigator.pop(context);

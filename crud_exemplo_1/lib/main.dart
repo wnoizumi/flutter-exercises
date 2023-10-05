@@ -1,13 +1,11 @@
 import 'package:crud_exemplo_1/navegacao_controller.dart';
 import 'package:crud_exemplo_1/pessoa_controller.dart';
-import 'package:crud_exemplo_1/pessoa_form.dart';
-import 'package:crud_exemplo_1/pessoas_lista.dart';
-import 'package:crud_exemplo_1/produtos_lista.dart';
 import 'package:crud_exemplo_1/rotas.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MainApp());
 }
 

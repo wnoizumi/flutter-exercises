@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'menu_navegacao.dart';
 
 class ProdutosLista extends StatefulWidget {
+  const ProdutosLista({super.key});
+
   @override
   State<ProdutosLista> createState() => _ProdutosListaState();
 }

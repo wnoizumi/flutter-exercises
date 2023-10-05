@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PessoasLista extends StatelessWidget {
+  const PessoasLista({super.key});
+
   @override
   Widget build(BuildContext context) {
     var pessoaController = Provider.of<PessoaController>(context);

@@ -2,7 +2,7 @@ class PessoaModelo {
   String nome;
   String email;
   DateTime dataNascimento;
-  String genero;
+  String departamento;
   String telefone;
   String endereco;
 
@@ -10,7 +10,7 @@ class PessoaModelo {
       {required this.nome,
       required this.email,
       required this.dataNascimento,
-      required this.genero,
+      required this.departamento,
       required this.telefone,
       required this.endereco});
 
