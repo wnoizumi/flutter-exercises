@@ -27,6 +27,7 @@ class PessoasLista extends StatelessWidget {
               final pessoa = pessoaController.pessoas[index];
               return Card(
                 margin: const EdgeInsets.all(8),
+                // incluir um botão para excluir neste card
                 child: ListTile(
                   title: Text('Nome: ${pessoa.nome}'),
                   subtitle: Text('Email: ${pessoa.email}'),
