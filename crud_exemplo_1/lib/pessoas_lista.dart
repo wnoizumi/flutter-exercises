@@ -1,4 +1,6 @@
+import 'package:crud_exemplo_1/menu_navegacao.dart';
 import 'package:crud_exemplo_1/pessoa_controller.dart';
+import 'package:crud_exemplo_1/rotas.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,13 +11,14 @@ class PessoasLista extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: const MenuNavegacao(),
         appBar: AppBar(
           title: const Text('Cadastro de Pessoas'),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             //aqui definimos a rota da tela a ser aberta
-            Navigator.pushNamed(context, '/add_pessoa');
+            Navigator.pushNamed(context, Rotas.PESSOAS_ADD);
           },
           child: const Icon(Icons.add),
         ),

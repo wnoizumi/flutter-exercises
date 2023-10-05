@@ -1,6 +1,9 @@
+import 'package:crud_exemplo_1/navegacao_controller.dart';
 import 'package:crud_exemplo_1/pessoa_controller.dart';
 import 'package:crud_exemplo_1/pessoa_form.dart';
 import 'package:crud_exemplo_1/pessoas_lista.dart';
+import 'package:crud_exemplo_1/produtos_lista.dart';
+import 'package:crud_exemplo_1/rotas.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,15 +16,15 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => PessoaController(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => PessoaController()),
+        ChangeNotifierProvider(create: (context) => NavegacaoController()),
+      ],
       child: MaterialApp(
-        initialRoute: '/',
+        initialRoute: '/pessoas',
         //aqui definimos as rotas para todas as telas do app
-        routes: {
-          '/': (context) => PessoasLista(),
-          '/add_pessoa': (context) => PessoaForm(),
-        },
+        routes: Rotas.widgetsMap(),
         theme: ThemeData(
           useMaterial3: true,
           colorSchemeSeed: Colors.lightBlue,
