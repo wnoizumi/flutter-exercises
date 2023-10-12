@@ -7,6 +7,10 @@ class CatfactsController extends ChangeNotifier {
   String _currentFact = "No cat fact yet";
   String get currentFact => _currentFact;
 
+  CatfactsController() {
+    fetchNewFact();
+  }
+
   void fetchNewFact() async {
     _currentFact =
         (await apiGateway.fetchCatfact()) ?? "No new cat fact found :(";
