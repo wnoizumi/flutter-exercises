@@ -2,6 +2,7 @@ import 'package:crud_exemplo_1/pessoa_controller.dart';
 import 'package:crud_exemplo_1/pessoal_modelo.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 
 class PessoaForm extends StatefulWidget {
@@ -15,6 +16,10 @@ class _PessoaFormState extends State<PessoaForm> {
   //Identificador global deste form
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final formatoData = DateFormat('dd/MM/yyyy');
+  final maskFormatter = MaskTextInputFormatter(
+      mask: '(##) #####-####',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
 
   String nome = '';
   DateTime? dataNascimento;
@@ -125,6 +130,7 @@ class _PessoaFormState extends State<PessoaForm> {
                     },
                   ),
                   TextFormField(
+                    inputFormatters: [maskFormatter],
                     decoration: const InputDecoration(labelText: 'Telefone'),
                     validator: (value) {
                       if (value!.isEmpty) {

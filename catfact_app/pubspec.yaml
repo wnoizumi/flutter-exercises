@@ -1,4 +1,4 @@
-name: crud_exemplo_1
+name: catfact_app
 description: A new Flutter project.
 publish_to: 'none'
 version: 0.1.0
@@ -7,10 +7,10 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
+  dio: ^5.3.3
   flutter:
     sdk: flutter
-  intl: ^0.18.1
-  mask_text_input_formatter: ^2.5.0
+  logging: ^1.2.0
   provider: ^6.0.5
 
 dev_dependencies:
@@ -20,3 +20,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/
