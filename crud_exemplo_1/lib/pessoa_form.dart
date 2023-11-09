@@ -19,6 +19,7 @@ class _PessoaFormState extends State<PessoaForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final formatoData = DateFormat('dd/MM/yyyy');
   static const Uuid geradorId = Uuid();
+  final departamentos = ['Contábil', 'Recursos Humanos', 'TI'];
 
   String nome = '';
   DateTime? dataNascimento;
@@ -37,6 +38,8 @@ class _PessoaFormState extends State<PessoaForm> {
       telefone = pessoa.telefone;
       endereco = pessoa.endereco;
       id = pessoa.id;
+    } else {
+      departamento = departamentos.first;
     }
   }
 
@@ -63,8 +66,6 @@ class _PessoaFormState extends State<PessoaForm> {
     // Formatando a data selecionada para mostrar
     final dataNascimentoFormatada =
         dataNascimento == null ? '' : formatoData.format(dataNascimento!);
-
-    final departamentos = ['Contábil', 'Recursos Humanos', 'TI'];
 
     return SafeArea(
       child: Scaffold(
@@ -120,21 +121,22 @@ class _PessoaFormState extends State<PessoaForm> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  DropdownMenu<String>(
-                    width: MediaQuery.of(context).size.width - 60,
-                    leadingIcon: const Icon(Icons.storefront),
-                    label: const Text("Departamento"),
-                    initialSelection: departamento,
-                    onSelected: (String? value) {
-                      // This is called when the user selects an item.
+                  DropdownButton<String>(
+                    isExpanded: true,
+                    value: departamento,
+                    icon: const Icon(Icons.arrow_downward),
+                    elevation: 16,
+                    onChanged: (String? value) {
                       setState(() {
                         departamento = value!;
                       });
                     },
-                    dropdownMenuEntries: departamentos
-                        .map<DropdownMenuEntry<String>>((String value) {
-                      return DropdownMenuEntry<String>(
-                          value: value, label: value);
+                    items: departamentos
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
                     }).toList(),
                   ),
                   TextFormField(

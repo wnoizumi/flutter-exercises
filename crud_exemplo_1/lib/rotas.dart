@@ -14,9 +14,9 @@ class Rotas {
   //Mapeamento de rotas para telas
   static Map<String, WidgetBuilder> widgetsMap() {
     return {
-      PESSOAS: (context) => PessoasLista(),
+      PESSOAS: (context) => const PessoasLista(),
       PESSOAS_ADD: (context) => PessoaForm(),
-      PRODUTOS: (context) => ProdutosLista(),
+      PRODUTOS: (context) => const ProdutosLista(),
     };
   }
 }
