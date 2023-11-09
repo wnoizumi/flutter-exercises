@@ -5,6 +5,7 @@ class PessoaModelo {
   String departamento;
   String telefone;
   String endereco;
+  String id;
 
   PessoaModelo(
       {required this.nome,
@@ -12,7 +13,8 @@ class PessoaModelo {
       required this.dataNascimento,
       required this.departamento,
       required this.telefone,
-      required this.endereco});
+      required this.endereco,
+      required this.id});
 
   @override
   int get hashCode => email.hashCode;

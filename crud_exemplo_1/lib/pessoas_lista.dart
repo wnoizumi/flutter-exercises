@@ -1,5 +1,6 @@
 import 'package:crud_exemplo_1/menu_navegacao.dart';
 import 'package:crud_exemplo_1/pessoa_controller.dart';
+import 'package:crud_exemplo_1/pessoa_form.dart';
 import 'package:crud_exemplo_1/rotas.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,14 +35,48 @@ class PessoasLista extends StatelessWidget {
                 margin: const EdgeInsets.all(8),
                 // incluir um botão para excluir neste card
                 child: ListTile(
+                  leading: IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text("Confirmar Exclusão"),
+                          content:
+                              const Text("Tem certeza que deseja excluir?"),
+                          actions: [
+                            TextButton(
+                              child: const Text('Confirmar'),
+                              onPressed: () {
+                                pessoaController.excluir(pessoa);
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            TextButton(
+                              child: const Text('Cancelar'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.delete),
+                  ),
                   title: Text('Nome: ${pessoa.nome}'),
                   subtitle: Text('Email: ${pessoa.email}'),
-                  onTap: () {
-                    // abrir a tela para alterar pessoa
+                  onTap: () {},
+                  onLongPress: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) =>
+                            PessoaForm(pessoaSelecionada: pessoa),
+                      ),
+                    );
                   },
                 ),
               );
-              ;
             },
           ),
         ),

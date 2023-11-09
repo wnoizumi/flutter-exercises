@@ -16,7 +16,7 @@ class Rotas {
     return {
       PESSOAS: (context) => PessoasLista(),
       PESSOAS_ADD: (context) => PessoaForm(),
-      '/produtos': (context) => ProdutosLista(),
+      PRODUTOS: (context) => ProdutosLista(),
     };
   }
 }

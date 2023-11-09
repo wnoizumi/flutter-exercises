@@ -25,11 +25,11 @@ class _MenuNavegacaoState extends State<MenuNavegacao> {
 
     return NavigationBar(
       onDestinationSelected: (int index) {
-        navegacaoController.atualizarPaginaSelecionada(index);
+        navegacaoController.atualizarTelaSelecionada(index);
         Navigator.pushReplacementNamed(context, _getRotaSelecionada(index));
       },
       indicatorColor: Colors.blue[800],
-      selectedIndex: navegacaoController.paginaSelecionada,
+      selectedIndex: navegacaoController.telaSelecionada,
       destinations: const <Widget>[
         NavigationDestination(
           selectedIcon: Icon(Icons.person_2),

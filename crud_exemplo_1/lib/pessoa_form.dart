@@ -2,24 +2,23 @@ import 'package:crud_exemplo_1/pessoa_controller.dart';
 import 'package:crud_exemplo_1/pessoal_modelo.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class PessoaForm extends StatefulWidget {
-  const PessoaForm({super.key});
+  PessoaModelo? pessoaSelecionada;
+
+  PessoaForm({super.key, this.pessoaSelecionada});
 
   @override
-  _PessoaFormState createState() => _PessoaFormState();
+  _PessoaFormState createState() => _PessoaFormState(pessoaSelecionada);
 }
 
 class _PessoaFormState extends State<PessoaForm> {
   //Identificador global deste form
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final formatoData = DateFormat('dd/MM/yyyy');
-  final maskFormatter = MaskTextInputFormatter(
-      mask: '(##) #####-####',
-      filter: {"#": RegExp(r'[0-9]')},
-      type: MaskAutoCompletionType.lazy);
+  static const Uuid geradorId = Uuid();
 
   String nome = '';
   DateTime? dataNascimento;
@@ -27,6 +26,19 @@ class _PessoaFormState extends State<PessoaForm> {
   String email = '';
   String telefone = '';
   String endereco = '';
+  String id = geradorId.v4();
+
+  _PessoaFormState(PessoaModelo? pessoa) {
+    if (pessoa != null) {
+      nome = pessoa.nome;
+      dataNascimento = pessoa.dataNascimento;
+      departamento = pessoa.departamento;
+      email = pessoa.email;
+      telefone = pessoa.telefone;
+      endereco = pessoa.endereco;
+      id = pessoa.id;
+    }
+  }
 
   // Função para mostrar o calendário
   Future<void> _selecionarData(BuildContext context) async {
@@ -52,6 +64,8 @@ class _PessoaFormState extends State<PessoaForm> {
     final dataNascimentoFormatada =
         dataNascimento == null ? '' : formatoData.format(dataNascimento!);
 
+    final departamentos = ['Contábil', 'Recursos Humanos', 'TI'];
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -67,6 +81,7 @@ class _PessoaFormState extends State<PessoaForm> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   TextFormField(
+                    initialValue: nome,
                     autofocus: true,
                     decoration: const InputDecoration(labelText: 'Nome'),
                     validator: (value) {
@@ -104,20 +119,26 @@ class _PessoaFormState extends State<PessoaForm> {
                       ),
                     ],
                   ),
-                  TextFormField(
-                    decoration:
-                        const InputDecoration(labelText: 'Departamento'),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Digite o departamento';
-                      }
-                      return null;
+                  const SizedBox(height: 20),
+                  DropdownMenu<String>(
+                    width: MediaQuery.of(context).size.width - 60,
+                    leadingIcon: const Icon(Icons.storefront),
+                    label: const Text("Departamento"),
+                    initialSelection: departamento,
+                    onSelected: (String? value) {
+                      // This is called when the user selects an item.
+                      setState(() {
+                        departamento = value!;
+                      });
                     },
-                    onSaved: (value) {
-                      departamento = value!;
-                    },
+                    dropdownMenuEntries: departamentos
+                        .map<DropdownMenuEntry<String>>((String value) {
+                      return DropdownMenuEntry<String>(
+                          value: value, label: value);
+                    }).toList(),
                   ),
                   TextFormField(
+                    initialValue: email,
                     decoration: const InputDecoration(labelText: 'Email'),
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -130,7 +151,7 @@ class _PessoaFormState extends State<PessoaForm> {
                     },
                   ),
                   TextFormField(
-                    inputFormatters: [maskFormatter],
+                    initialValue: telefone,
                     decoration: const InputDecoration(labelText: 'Telefone'),
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -143,6 +164,7 @@ class _PessoaFormState extends State<PessoaForm> {
                     },
                   ),
                   TextFormField(
+                    initialValue: endereco,
                     decoration: const InputDecoration(labelText: 'Endereço'),
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -159,13 +181,14 @@ class _PessoaFormState extends State<PessoaForm> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        pessoaController.incluir(PessoaModelo(
+                        pessoaController.salvar(PessoaModelo(
                             nome: nome,
                             email: email,
                             dataNascimento: dataNascimento!,
                             departamento: departamento,
                             telefone: telefone,
-                            endereco: endereco));
+                            endereco: endereco,
+                            id: id));
                         Navigator.pop(context);
                       }
                     },

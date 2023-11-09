@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class NavegacaoController extends ChangeNotifier {
-  int _paginaSelecionada = 0;
+  int _telaSelecionada = 0;
 
-  int get paginaSelecionada => _paginaSelecionada;
+  int get telaSelecionada => _telaSelecionada;
 
-  void atualizarPaginaSelecionada(int index) {
-    _paginaSelecionada = index;
+  void atualizarTelaSelecionada(int index) {
+    _telaSelecionada = index;
     notifyListeners();
   }
 }
